@@ -1,0 +1,21 @@
+{
+  "method_name": "knn_r05525122",
+  "project_type": "classification"
+  "arguments_def": [
+       {
+          "name": "n_neighbors",
+          "type": "int",
+          "range": "",
+          "default_value": "5",
+          "description": ""
+      },
+      {
+          "name": "weights",
+          "type": "enum",
+          "range": "uniform,distance",
+          "default_value": "uniform",
+          "description": ""
+      }
+  ]
+}
+sklearn說明文件:http://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsClassifier.html

@@ -1,0 +1,77 @@
+import logging
+from inanalysis_algo.classification.knn import Knn
+from inanalysis_algo.classification.dc_tree import DCtree
+from inanalysis_algo.abnormal_detection.one_class_svm import OneClassSVM
+from inanalysis_algo.regression.linear_regression import LinearRegression
+from inanalysis_algo.regression.polynomial_regression import PolynomialRegression
+from inanalysis_algo.clustering.kmeans import Kmeans
+from inanalysis_algo.clustering.affinitypropagation import AffinityPropagation
+import enum
+logging.basicConfig(level=logging.DEBUG)
+log = logging.getLogger(__name__)
+
+
+class Algorithm(enum.Enum):
+    one_class_svm = {
+        "algo_name": "one-class_SVM",
+        "project_type": "abnormal-detection"
+    }
+    knn = {
+        "algo_name": "knn",
+        "project_type": "classification"
+    }
+    dc_tree = {
+        "algo_name": "decision-tree",
+        "project_type": "classification"
+    }
+    linear_regression = {
+        "algo_name": "linear-regression",
+        "project_type": "regression"
+    }
+    polynomial_regression = {
+        "algo_name": "polynomial_regression",
+        "project_type": "regression"
+    }
+    k_means = {
+        "algo_name": "k-means",
+        "project_type": "clustering"
+    }
+    affinity_propagation = {
+        "algo_name": "affinity_propagation",
+        "project_type": "clustering"
+    }
+    @staticmethod
+    def get_project_type(algo_name):
+        for algo in Algorithm:
+            if algo.value['algo_name'] == algo_name:
+                return algo.value['project_type']
+        return None
+
+
+class AlgoUtils:
+    @staticmethod
+    def algo_factory(model_method):
+        if model_method == Algorithm.one_class_svm.value['algo_name']:
+            log.debug("Abnormal-detection one-class_SVM Training")
+            algo = OneClassSVM()
+        elif model_method == Algorithm.knn.value['algo_name']:
+            log.debug("Classification knn Training")
+            algo = Knn()
+        elif model_method == Algorithm.dc_tree.value['algo_name']:
+            log.debug("Classification dc-tree Training")
+            algo = DCtree()
+        elif model_method == Algorithm.linear_regression.value['algo_name']:
+            log.debug("Regression linear-regression Training")
+            algo = LinearRegression()
+        elif model_method == Algorithm.polynomial_regression.value['algo_name']:
+            log.debug("Regression polynomial_regression Training")
+            algo = PolynomialRegression()
+        elif model_method == Algorithm.k_means.value['algo_name']:
+            log.debug("Clustering k-means Training")
+            algo = Kmeans()
+        elif model_method == Algorithm.affinity_propagation.value['algo_name']:
+            log.debug("Clustering affinity propagation Training")
+            algo = AffinityPropagation()
+        else:
+            return None
+        return algo
