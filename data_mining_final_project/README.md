@@ -1,2 +1,2 @@
-# data_mining_project_2
+# requirements
 * pip install -r requirements.txt
